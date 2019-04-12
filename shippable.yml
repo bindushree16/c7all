@@ -1,5 +1,5 @@
 resources:
-   - name: C7all
+   - name: c7all
      type: gitRepo
      repoPath: bindushree16/c7all
      configuration:
@@ -46,7 +46,7 @@ pipelines:
          
         triggeredBy:
           resources:
-            - C7all
+            - c7all
       - name: in_trigger_step2
         type: bash
         configuration:
@@ -67,4 +67,4 @@ pipelines:
             
         triggeredBy:
           resources:
-            - C7all 
+            - c7all 
