@@ -26,7 +26,7 @@ pipelines:
           - SECURE_ENV2: test_value-pipe-2
       runtime: onHost-pipe
     steps:
-      - name: in_trigger_step
+      - name: bash_step1
         type: bash
         configuration:
           affinityGroup: test_group 
@@ -47,7 +47,7 @@ pipelines:
         triggeredBy:
           resources:
             - c7all
-      - name: in_trigger_step2
+      - name: bash_step2
         type: bash
         configuration:
           affinityGroup: test_group 
