@@ -47,7 +47,7 @@ pipelines:
             type: image
             image:
              custom:
-               name: drydock/u16cppall
+               name: drydock/u14cppall
                tag: master
         triggeredBy:
           resources:
@@ -63,7 +63,7 @@ pipelines:
             type: image
             image:
              custom:
-               name: drydock/u16all
+               name: drydock/u14all
                tag: master
         triggeredBy:
           steps:
