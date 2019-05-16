@@ -1,70 +1,73 @@
 resources:
-   - name: c7all
-     type: gitRepo
-     repoPath: bindushree16/c7all
-     configuration:
-        integrationName: github
-        branches:
-           except: "*test"
-           only: "master*"
-        tags:
-           except: none
-           only: none   
-        buildOnCommit: true
-     initialVersion:
-       sha: master
-       
+  - name: sample_2
+    type: gitRepo
+    repoPath: bindushree16/c7all
+    configuration:
+      integrationName: github
+      branches:
+        only: master
+      tags:
+        except: none
+        only: none   
+      buildOnCommit: true
+      buildOnPullRequest: true
+      buildOnPullRequestClose: true
+      buildOnRelease: true
+      buildOnTagPush: true
+      buildOnFileCommit: "*test"
+      shallowDepth: 2
+      gitConfig: 
+        - dont_know
+        - dont_know_2
+    initialVersion:
+      sha: master
+
 pipelines:
-  - name: test_pipeline_1
+  - name: pipeline_1
     setup:
       environmentVariables:
-        normal:
-          - ENV1: value-pipe-1
-          - ENV2: value-pipe-2
-        encrypted:
-          - SECURE_ENV1: test_value-pipe-1
-          - SECURE_ENV2: test_value-pipe-2
-      runtime: onHost-pipe
-    steps:
-      - name: bash_step1
-        type: bash
-        configuration:
-          affinityGroup: test_group 
-        setup:
-          environmentVariables:
-            normal:
-              - ENV1: value1
-              - ENV2: value2
-            encrypted:
-              - SECURE_ENV1: test_value
-              - SECURE_ENV2: test_value
-          runtime: onHost
-        execution:
-          onExecute:
-            - echo "executing task command 1"
-            - echo "executing task command 2"
-         
-        triggeredBy:
-          resources:
-            - c7all
-      - name: bash_step2
-        type: bash
-        configuration:
-          affinityGroup: test_group 
-        setup:
-          environmentVariables:
-            normal:
-              - ENV1: value1
-              - ENV2: value2
-            encrypted:
-              - SECURE_ENV1: test_value
-              - SECURE_ENV2: test_value
-          runtime: onHost
-        execution:
-          onExecute:
-            - echo "executing task command 1"
-            - echo "executing task command 2"
+        readOnly:
+          - ENV1:               
+      runtime:       
+        type: image
+        image:
+          auto:
+            language:
+            versions:
+          custom:
+            name:
+            tag:
+            options:
             
+    steps:    
+      - name: test11
+        type: bash
+        setup:
+          runtime:
+            type: image
+            image:
+             custom:
+               name: drydock/u16cppall
+               tag: master
         triggeredBy:
           resources:
-            - c7all 
+            - sample_2
+        execution:
+          onExecute:
+            - echo "hello"
+            
+      - name: test22
+        type: bash
+        setup:
+          runtime:
+            type: image
+            image:
+             custom:
+               name: drydock/u16all
+               tag: master
+        triggeredBy:
+          steps:
+            - test11
+        execution:
+          onExecute:
+            - echo "step2"
