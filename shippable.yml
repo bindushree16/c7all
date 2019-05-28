@@ -1,73 +1,101 @@
 resources:
-  - name: sample_2
+  - name: bash
     type: gitRepo
-    repoPath: bindushree16/c7all
+    repoPath: vijayreddy1991/resources
     configuration:
-      integrationName: github
+      integrationName: vijayku_github
       branches:
         only: master
-      tags:
-        except: none
-        only: none   
-      buildOnCommit: true
-      buildOnPullRequest: true
-      buildOnPullRequestClose: true
-      buildOnRelease: true
-      buildOnTagPush: true
-      buildOnFileCommit: "*test"
-      shallowDepth: 2
-      gitConfig: 
-        - dont_know
-        - dont_know_2
     initialVersion:
       sha: master
 
 pipelines:
-  - name: pipeline_1
-    setup:
-      environmentVariables:
-        readOnly:
-          - ENV1:               
-      runtime:       
-        type: image
-        image:
-          auto:
-            language:
-            versions:
-          custom:
-            name:
-            tag:
-            options:
-            
-    steps:    
-      - name: test11
+  - name: pipeline1234
+    steps:
+      - name: testbash1
         type: bash
+        configuration:
+          affinityGroup: vijay@#$%^&*
+          nodePool: kermit_ubuntu_pool
+          chronological: true        
         setup:
-          runtime:
+          runtime:            
             type: image
             image:
-             custom:
-               name: drydock/u14cppall
-               tag: master
+              auto:
+                language: nodejs
+                versions: 
+                  - 8.16.0
+              custom:
+                name: drydock/c7node
+                tag: master
+                options: ""
         triggeredBy:
           resources:
-            - sample_2
+            - bash
         execution:
+          onStart:
+            - printenv
           onExecute:
-            - echo "hello"
-            
-      - name: test22
+            - printenv
+            - echo "vijay"
+
+      - name: testbash2
         type: bash
+        configuration:
+          affinityGroup: vijay@#$%^&*
+          priority: 2
+          nodePool: kermit_ubuntu_pool
+          chronological: true
         setup:
-          runtime:
+          runtime:            
             type: image
             image:
-             custom:
-               name: drydock/u14all
-               tag: master
+              auto:
+                language: nodejs
+                versions: 
+                  - 10.15.3
+              custom:
+                name: drydock/u16node
+                tag: master
+                options: ""
         triggeredBy:
           steps:
-            - test11
+            - testbash1
         execution:
+          onStart:
+            - printenv
           onExecute:
-            - echo "step2"
+            - printenv
+            - echo "vijay"
+            
+
+      - name: testbash3
+        type: bash
+        configuration:
+          affinityGroup: vijay@#$%^&*
+          priority: 1
+          nodePool: kermit_ubuntu_pool
+          chronological: true        
+        setup: 
+          runtime:            
+            type: image
+            image:
+              auto:
+                language: nodejs
+                versions: 
+                  - 8.16.0
+              custom:
+                name: drydock/u16node
+                tag: master
+                options: ""
+        triggeredBy:
+          steps:
+            - testbash2
+        execution:
+          onStart:
+            - printenv
+          onExecute:
+            - printenv
+            - echo "vijay"
+
