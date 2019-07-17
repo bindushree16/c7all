@@ -1,0 +1,8 @@
+pipelines:
+  - name: bindu
+    steps:
+      - name: test_1
+        type: Bash
+        execution:
+          onExecute:
+            - printenv
