@@ -3,6 +3,12 @@ pipelines:
     steps:
       - name: test_11
         type: Bash
+        configuration:
+          runtime:       
+            type: image
+              custom:
+                name: drydock/u16nodejs
+                tag: master
         execution:
           onExecute:
             - printenv
