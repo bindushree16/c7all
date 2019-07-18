@@ -6,6 +6,7 @@ pipelines:
         configuration:
           runtime:       
             type: image
+            image:
               custom:
                 name: drydock/u16nodejs
                 tag: master
