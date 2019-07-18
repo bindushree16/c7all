@@ -1,7 +1,7 @@
 pipelines:
-  - name: bindu
+  - name: bindu11
     steps:
-      - name: test_1
+      - name: test_11
         type: Bash
         execution:
           onExecute:
