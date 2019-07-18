@@ -4,11 +4,15 @@ pipelines:
       - name: test_11
         type: Bash
         configuration:
-          runtime:       
+          runtime:            
             type: image
             image:
+#               auto:
+#                 language: nodejs
+#                 versions: 
+#                   - 8.16.0
               custom:
-                name: drydock/u16nodejs
+                name: drydock/u16node
                 tag: master
         execution:
           onExecute:
